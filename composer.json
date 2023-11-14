@@ -1,0 +1,16 @@
+{
+    "name": "haythemmabrouk/specification",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Haythem Mabrouk",
+            "email": "hmabrouk-ext@voyageprive.com"
+        }
+    ],
+    "require": {}
+}
