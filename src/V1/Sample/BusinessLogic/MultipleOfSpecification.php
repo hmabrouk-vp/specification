@@ -1,7 +1,8 @@
 <?php
 
-namespace App\V1\Sample\Sample1;
+namespace App\V1\Sample\BusinessLogic;
 
+use App\V1\Sample\Sample1\Number;
 use App\V1\SpecificationInterface;
 
 class MultipleOfSpecification implements SpecificationInterface

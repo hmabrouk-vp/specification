@@ -1,6 +1,6 @@
 <?php
 
-namespace App\V1\Logic;
+namespace App\V1\Core;
 
 use App\V1\SpecificationInterface;
 

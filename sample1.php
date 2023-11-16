@@ -1,13 +1,14 @@
 <?php
 require_once  './vendor/autoload.php';
 
-use App\V1\Logic\AndSpecification;
-use App\V1\Logic\NotSpecification;
-use App\V1\Logic\OrSpecification;
-use App\V1\Sample\Sample1\MultipleOfSpecification;
+use App\V1\Core\AndSpecification;
+use App\V1\Core\CallableSpecification;
+use App\V1\Core\NotSpecification;
+use App\V1\Core\OrSpecification;
+use App\V1\Sample\BusinessLogic\MultipleOfSpecification;
+use App\V1\Sample\BusinessLogic\NumberGreaterThan6Specification;
+use App\V1\Sample\BusinessLogic\NumberLessThan10Specification;
 use App\V1\Sample\Sample1\Number;
-use App\V1\Sample\Sample1\NumberGreaterThan6Specification;
-use App\V1\Sample\Sample1\NumberLessThan10Specification;
 
 $number = new Number(7);
 
@@ -25,3 +26,27 @@ assert($notAssert1->isSatisfiedBy($number));
 
 $assert2 = new MultipleOfSpecification(new Number(6));
 assert((new OrSpecification([$assert1, $assert2]))->isSatisfiedBy($number));
+
+
+$assert3 = new CallableSpecification();
+assert($assert3->isSatisfiedBy([
+    CallableSpecification::CALLABLE => 'toto',
+    CallableSpecification::ARGS => $number->number
+]));
+
+
+function toto($a) {
+    return $a % 2 == 0;
+}
+
+class A {
+    function toto($a) {
+        return $a % 2 == 0;
+    }
+}
+
+assert($assert3->isSatisfiedBy([
+    CallableSpecification::CALLABLE => [new A(), 'toto'],
+    CallableSpecification::ARGS => $number->number
+]));
+

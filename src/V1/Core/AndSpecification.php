@@ -1,11 +1,11 @@
 <?php
 
 
-namespace App\V1\Logic;
+namespace App\V1\Core;
 
 use App\V1\SpecificationInterface;
 
-class OrSpecification implements SpecificationInterface
+class AndSpecification implements SpecificationInterface
 {
     /** @var SpecificationInterface[] */
     private $specifications;
@@ -19,10 +19,10 @@ class OrSpecification implements SpecificationInterface
     public function isSatisfiedBy($item)
     {
         foreach ($this->specifications as $specification) {
-            if($specification->isSatisfiedBy($item))  {
-                return true;
+            if(!$specification->isSatisfiedBy($item))  {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 }
